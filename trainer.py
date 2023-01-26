@@ -1,9 +1,5 @@
 import pandas as pd 
-from matplotlib import pyplot as plt
-import seaborn as sns
-import numpy as np
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import pickle
 
 
