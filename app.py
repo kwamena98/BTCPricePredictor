@@ -1,5 +1,11 @@
 from flask import Flask,request,render_template
 import json
+import pickle
+
+
+with open('model.pkl', 'rb') as file:
+    model = pickle.load(file)
+
 
 
 app=Flask(__name__)
@@ -8,10 +14,13 @@ app=Flask(__name__)
 @app.route('/home',methods=['GET','POST'])
 def home():
     if request.method=='POST':
-        open_= request.get_json()
-        print(open_)
+        output= request.get_json()
+        print(output)
+        y=model.predict([[int(output['open']),int(output['high']),int(output['low']),int(output['volume'])]])
+        print(str(y))
 
-        return {'message':'ok'}
+
+        return {'message':str(y[0])}
 
 
     return render_template('home.html')
